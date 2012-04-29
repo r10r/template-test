@@ -86,7 +86,8 @@ module Template
     # Runs the test code in the provided block for the specified template.
     # @param [String] template_path the path to the template
     # @param [Proc] block a block with the template testing code
-    # @example see #spec/erb_spec.rb
+    # @see {file:spec/erb_spec.rb}
+    # @return [Context] the template test context
     def template(template_path, &block)
       Context.new(template_path, &block)
     end
