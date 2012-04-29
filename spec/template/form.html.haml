@@ -1,0 +1,6 @@
+%html
+  %head
+  %body
+    %form{:action => '/', :method => "post"}
+      %input{:type => "text", :name => "title", :value => @title}
+      %textarea{:name => "content"} #{@content}

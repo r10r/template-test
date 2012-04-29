@@ -14,4 +14,10 @@ Gem::Specification.new do |gem|
   gem.name          = "template-test"
   gem.require_paths = ["lib"]
   gem.version       = Template::Test::VERSION
+  gem.add_dependency 'rspec'
+  gem.add_dependency 'nokogiri'
+  gem.add_dependency 'haml'
+  gem.add_development_dependency 'autotest'
+  gem.add_development_dependency 'autotest-fsevent'
+  gem.add_development_dependency 'autotest-growl'
 end
