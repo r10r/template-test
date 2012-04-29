@@ -11,7 +11,9 @@ Add this line to your application's Gemfile:
 
 ## Using with RSpec
 
-In your `test_helper` include the Template::Test module in the rspec config:
+In your `test_helper.rb` include the `Template::Test module in the rspec config:
+
+    require 'template-test'
 
     RSpec.configure do |config|
        config.include Template::Test
