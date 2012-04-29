@@ -3,6 +3,10 @@ require 'nokogiri'
 
 module Template
   module Test
+    # Class that holds the context for a template
+    # Variables used by the template can be added to the
+    # context using the set method.
+    # @see #set
     class Context
       attr_accessor :nodes
 
@@ -12,7 +16,7 @@ module Template
         self.instance_eval(&block)
       end
 
-      # @return the parsed Nokogiri::HTML document that wraps the rendered template
+      # @return [Nokogiri::HTML] the document that wraps the rendered template
       # @param [Boolean] reload true if the document should be parsed again
       def document(reload = false)
         if reload
@@ -25,9 +29,9 @@ module Template
       # of the document which wraps the rendered template.
       # The nodes retrieved by the given xpath expression can
       # be accessed through the 'nodes' method.
-      # @param xpath an XPATH search expression
-      # @param block the testing code
-      # @example see #spec/erb_spec.rb
+      # @param [String] xpath an XPATH search expression
+      # @param [Proc] block the testing code
+      # @see {file:spec/erb_spec.rb}
       def xpath(xpath, &block)
         @xpath = xpath
         @nodes = document().xpath(@xpath)
@@ -37,7 +41,7 @@ module Template
       # Creates an instance variable which is available in the rendered template.
       # @param [Symbol] symbol the name of the instance variable
       # @param [Object] value the value of the instance variable
-      # @example see #spec/erb_spec.rb
+      # @see {file:spec/erb_spec.rb}
       def set(symbol, value)
         sym = "@#{symbol.to_s}".to_sym
         instance_variable_set(sym, value)
@@ -80,8 +84,8 @@ module Template
     end
 
     # Runs the test code in the provided block for the specified template.
-    # @param template_path the path to the template
-    # @param block a block containing the template testing code
+    # @param [String] template_path the path to the template
+    # @param [Proc] block a block with the template testing code
     # @example see #spec/erb_spec.rb
     def template(template_path, &block)
       Context.new(template_path, &block)
