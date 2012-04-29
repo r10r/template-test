@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{Provides a simple DSL to test the rendering of HTML templates
                           defined in ERB or HAML using XPATH expressions}
   gem.summary       = %q{Simple DSL for HTML template (ERB,HAML) testing}
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/r10r/template-test"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

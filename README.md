@@ -1,6 +1,7 @@
 # Template::Test
 
-TODO: Write a gem description
+Template::Test provides a simple DSL to test the rendering of HTML templates
+defined in ERB or HAML using XPATH expressions.
 
 ## Installation
 
@@ -8,22 +9,14 @@ Add this line to your application's Gemfile:
 
     gem 'template-test'
 
-And then execute:
+## Using with RSpec
 
-    $ bundle
+In your `test_helper` include the Template::Test module in the rspec config:
 
-Or install it yourself as:
+    RSpec.configure do |config|
+       config.include Template::Test
+    end
 
-    $ gem install template-test
+## Examples
 
-## Usage
-
-TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+Have a look at the `*_spec.rb` files in the `spec` folder.
