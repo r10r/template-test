@@ -4,8 +4,9 @@ require File.expand_path('../lib/template-test/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Ruben Jenster"]
   gem.email         = ["r@j5r.eu"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{Provides a simple DSL to test the rendering of HTML templates
+                          defined in ERB or HAML using XPATH expressions}
+  gem.summary       = %q{Simple DSL for HTML template (ERB,HAML) testing}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
