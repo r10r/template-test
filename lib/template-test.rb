@@ -25,23 +25,22 @@ module Template
         @document ||= Nokogiri::HTML(render())
       end
 
-      # Evaluates the given block of test code in the context
-      # of the document which wraps the rendered template.
-      # The nodes retrieved by the given xpath expression can
-      # be accessed through the 'nodes' method.
+      # Searches the rendered HTML document for the given
+      # XPATH query. In the given block the result of the
+      # xpath query is available through the 'nodes' instance variable.
       # @param [String] xpath an XPATH search expression
       # @param [Proc] block the testing code
-      # @see {file:spec/erb_spec.rb}
+      # @example see {file:spec/erb_spec.rb}.
       def xpath(xpath, &block)
         @xpath = xpath
         @nodes = document().xpath(@xpath)
         self.instance_eval(&block)
       end
 
-      # Creates an instance variable which is available in the rendered template.
+      # Assigns an instance variable which is available when the template is rendered.
       # @param [Symbol] symbol the name of the instance variable
       # @param [Object] value the value of the instance variable
-      # @see {file:spec/erb_spec.rb}
+      # @example see {file:spec/erb_spec.rb}.
       def set(symbol, value)
         sym = "@#{symbol.to_s}".to_sym
         instance_variable_set(sym, value)
@@ -50,7 +49,7 @@ module Template
         end
       end
 
-      # Renders the template in this context. All variables defined by #set
+      # Renders the template. All variables defined by @see #set
       # are available in the template. They can be accessed as instance
       # variables or by using the attribute accessor.
       # @return [String] the rendered template
@@ -86,8 +85,8 @@ module Template
     # Runs the test code in the provided block for the specified template.
     # @param [String] template_path the path to the template
     # @param [Proc] block a block with the template testing code
-    # @see {file:spec/erb_spec.rb}
     # @return [Context] the template test context
+    # @example see {file:spec/erb_spec.rb}.
     def template(template_path, &block)
       Context.new(template_path, &block)
     end
