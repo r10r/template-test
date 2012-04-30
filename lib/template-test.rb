@@ -9,12 +9,7 @@ module Template
     # @see #set
     class Context
       attr_accessor :nodes
-
-      def initialize(template_path, &block)
-        @template_path = template_path
-        # how to capture local variables
-        self.instance_eval(&block)
-      end
+      attr_writer :html, :template_path
 
       # @return [Nokogiri::HTML] the document that wraps the rendered template
       # @param [Boolean] reload true if the document should be parsed again
@@ -22,7 +17,12 @@ module Template
         if reload
           @document = nil
         end
-        @document ||= Nokogiri::HTML(render())
+        @document ||= Nokogiri::HTML(html())
+      end
+
+      # @return [String] the rendered template
+      def html()
+        @html ||= render();
       end
 
       # Searches the rendered HTML document for the given
@@ -88,7 +88,22 @@ module Template
     # @return [Context] the template test context
     # @example see {file:spec/erb_spec.rb}.
     def template(template_path, &block)
-      Context.new(template_path, &block)
+      context = Context.new
+      context.template_path = template_path
+      context.instance_eval &block
+      context
+    end
+
+    # Runs the test code in the provided block for the specified rendered HTML.
+    # @param [String] html the rendered HTML content
+    # @param [Proc] block a block with template testing code
+    # @return [Context] the template test context
+    # @example see {file:spec/html_spec.rb}
+    def html(html, &block)
+      context = Context.new
+      context.html = html
+      context.instance_eval &block
+      context
     end
   end
 end
